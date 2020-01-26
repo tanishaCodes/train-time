@@ -1,85 +1,177 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Train Time</title>
-    <!-- Bootstrap -->
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
-  <!-- Firebase References -->
-  <script src="https://www.gstatic.com/firebasejs/6.0.4/firebase-app.js"></script>
-  <script src="https://www.gstatic.com/firebasejs/6.0.4/firebase-database.js"></script>
-  <!-- Moment.js Reference -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.22.2/moment.min.js"></script>
+
+    <!-- BOOTSTRAP -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+
+    <!-- MOMENT.JS REFERENCES -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.22.2/moment.min.js"></script>
 </head>
 
 <body>
     <div class="container">
         <div class="jumbotron" style="background-color: rgb(156, 64, 11); color: white">
-    <h1 class="text-center">Anytime is Train Time</h1>
-    <h3 class="text-center">Choo Choo. Chee Chee.</h3>
-    </div>
-    <div class="row">
-        <div class="col-md-12">
+            <h1 class="text-center">Anytime is Train Time</h1>
+            <h3 class="text-center">Choo Choo. Chee Chee.</h3>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
 
-          <!-- Current Train Schedule-->
-          <div class="card mb-4">
-            <div class="card-header" style="background-color: rgb(31, 31, 197); color: white">Current Train Schedule</div>
-            <div class="card-body">
-              <table class="table table-sm table-hover" id='current-train-schedule'>
-                <thead>
-                  <tr>
-                    <th scope="col">Train Name</th>
-                    <th scope="col">Destination</th>
-                    <th scope="col">Frequency (min)</th>
-                    <th scope="col">Next Arrival</th>
-                    <th scope="col">Minutes Away</th>
-                  </tr>
-                </thead>
-                <tbody>
-                </tbody>
-              </table>
+                <!-- CURRENT TRAIN SCHEDULE -->
+                <div class="card mb-4">
+                    <div class="card-header" style="background-color: rgb(31, 31, 197); color: white">Current Train
+                        Schedule</div>
+                    <div class="card-body">
+                        <table class="table table-sm table-hover" id='current-train-schedule'>
+                            <thead>
+                                <tr>
+                                    <th scope="col">Train Name</th>
+                                    <th scope="col">Destination</th>
+                                    <th scope="col">Frequency (min)</th>
+                                    <th scope="col">Next Arrival</th>
+                                    <th scope="col">Minutes Away</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
             </div>
-          </div>
         </div>
-      </div>
-      <div class="row">
-        <div class="col-md-12">
-          <!-- Add Employee  -->
-          <div class="card mb-4">
-            <div class="card-header" style="background-color: rgb(31, 31, 197); color: white">Add Train</div>
-            <div class="card-body">
-              <!-- Entry Form -->
-              <form>
-                <div class="form-group">
-                  <label for="employee-name-input">Train Name</label>
-                  <input class="form-control" id="name-input" placeholder="Abraham Lincoln" type="text">
+           
+
+        <div class="row">
+            <div class="col-md-12">
+
+                <!-- ADD TRAIN  -->
+                <div class="card mb-4">
+                    <div class="card-header" style="background-color: rgb(31, 31, 197); color: white">Add Train</div>
+                    <div class="card-body">
+
+                        <!-- ENTRY FORM -->
+                        <form>
+                            <div class="form-group">
+                                <label for="train-name-input">Train Name</label>
+                                <input class="form-control" id="train-input" placeholder="Abraham Lincoln" type="text">
+                            </div>
+                            <div class="form-group">
+                                <label for="destination-input">Destination</label>
+                                <input class="form-control" id="destination-input" placeholder="Chicago-St. Louis"
+                                    type="text">
+                            </div>
+                            <div class="form-group">
+                                <label for="time-input">First Train Time (HH:mm - military time)</label>
+                                <input class="form-control" id="time-input" placeholder="24:00" type="text">
+                            </div>
+                            <div class="form-group">
+                                <label for="frequency-input">Frequency (min)</label>
+                                <input class="form-control" id="frequency-input" placeholder="2" type="text">
+                            </div>
+                            <button class="btn btn-primary float-left" id="add-request-btn"
+                                style="background-color: rgb(31, 31, 197);">Submit</button>
+                        </form>
+                    </div>
                 </div>
-                <div class="form-group">
-                  <label for="role-input">Destination</label>
-                  <input class="form-control" id="destination-input" placeholder="Chicago-St. Louis" type="text">
-                </div>
-                <div class="form-group">
-                  <label for="start-input">First Train Time (HH:mm - military time)</label>
-                  <input class="form-control" id="time-input" placeholder="24:00" type="text">
-                </div>
-                <div class="form-group">
-                  <label for="rate-input">Frequency (min)</label>
-                  <input class="form-control" id="rate-input" placeholder="2" type="text">
-                </div>
-                <button class="btn btn-primary float-left" id="add-request-btn" style="background-color: rgb(31, 31, 197);">Submit</button>
-              </form>
             </div>
-          </div>
         </div>
-      </div>
     </div>
-    <!-- JavaScript -->
+
+<!-- FIREBASE -->
+<script src="https://www.gstatic.com/firebasejs/7.7.0/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/7.7.0/firebase-database.js"></script>
+
+<script>
+  // FIREBASE CONFIGURATION & LIBRARY
+  var firebaseConfig = {
+    apiKey: "AIzaSyCwVJrOhlryspeim54o0v5D4Aelm9d6F6Y",
+    authDomain: "train-time-a363e.firebaseapp.com",
+    databaseURL: "https://train-time-a363e.firebaseio.com",
+    projectId: "train-time-a363e",
+    storageBucket: "train-time-a363e.appspot.com"
+  };
+
+  // INITIALIZING FIREBASE
+  firebase.initializeApp(firebaseConfig);
+
+// Create a variable to reference the database.
+          var dataRef = firebase.database(); //Uncaught TypeError: firebase.database.ref is not a function at index.html:105
+      
+          // Initial Values
+          var train = "";
+          var destination = "";
+          var time = 0;
+          var frequency = 0;
+      
+          // Capture Button Click
+          $("#add-train").on("click", function(event) {
+            event.preventDefault();
+      
+            // Grabbed values from text boxes
+            train = $("#train-input").val().trim();
+            destination = $("#destination-input").val().trim();
+            time = $("#time-input").val().trim();
+            frequency = $("#frequency-input").val().trim();
+      
+            // Code for handling the push
+            dataRef.ref().push({
+              train: train,
+              destination: destination,
+              time: time,
+              frequency: frequency,
+
+              dateAdded: firebase.database.ServerValue.TIMESTAMP
+            });
+      
+          });
+      
+          // Firebase watcher .on("child_added"
+          dataRef.ref().on("child_added", function(childSnapshot) {
+
+        // Log everything that's coming out of snapshot
+        console.log(childSnapshot.val().train);
+        console.log(childSnapshot.val().destination);
+        console.log(childSnapshot.val().time);
+        console.log(childSnapshot.val().frequency);
+
+        // full list of items to the well
+        $("#current-train-schedule").append("<div class='well'><span class='current-train'> " +
+        childSnapshot.val().train +
+        " </span><span class='current-destination'> " + childSnapshot.val().destination +
+        " </span><span class='current-time'> " + childSnapshot.val().time +
+        " </span><span class='current-frequecy'> " + childSnapshot.val().frequency +
+        " </span></div>");
+      
+        // Handle the errors
+        }, function(errorObject) {
+                console.log("Errors handled: " + errorObject.code);
+        });
+
+        //APPEND TO THE CURRENT TRAIN SCHEDULE LIST
+        dataRef.ref().orderByChild("dateAdded").limitToLast(1).on("child_added", function(snapshot) {
+      // Change the HTML to reflect
+      $("#train-display").text(snapshot.val().train);
+      $("#destination-display").text(snapshot.val().destination);
+      $("#time-display").text(snapshot.val().time);
+      $("#frequency-display").text(snapshot.val().frequency);
+    });
+
+        </script>
+
+    <!-- JQUERY -->
+    <script src="https://code.jquery.com/jquery.js"></script>
+
+    <!-- JAVASCRIPT -->
     <script src="assests\javascript\app.js"></script>
 
-    
 </body>
+
 </html>
