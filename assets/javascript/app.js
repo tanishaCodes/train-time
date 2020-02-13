@@ -71,8 +71,7 @@ dataRef.ref().on(
     var destination = snapshot.val().destination;
     var firstTrain = snapshot.val().firstTrain;
     var frequency = snapshot.val().frequency;
-    //var nextTrain = childSnapshot.val().nextTrain;
-    //var MinutesTillTrain = childSnapshot.val().MinutesTillTrain;
+  
     console.log(snapshot.val());
 
     //MOMENT.JS; CONVERSION CODE FOR THE MINUTES & ARRIVAL firstTrain//
@@ -102,7 +101,7 @@ dataRef.ref().on(
         "</td></tr>"
     );
 
-    // Handle the errors
+    // HANDLES THE ERRORS
   },
   function(errorObject) {
     console.log("Errors handled: " + errorObject.code);
